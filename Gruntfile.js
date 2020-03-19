@@ -1,7 +1,20 @@
 /*global module:false*/
+const sass = require('node-sass');
 
 module.exports = function(grunt) {
   grunt.initConfig({
+    sass: {
+      options: {
+          implementation: sass,
+          sourceMap: false
+      },
+      release: {
+          files: {
+            "flexboxgrid2.css": "src/flexboxgrid2.scss",
+            "dist/flexboxgrid2.css": "src/flexboxgrid2.scss"
+          }
+      }
+    },
     myth: {
       compile: {
         expand: true,
@@ -76,15 +89,16 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks("grunt-sass");
   grunt.loadNpmTasks("grunt-myth");
   grunt.loadNpmTasks("grunt-contrib-cssmin");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-processhtml");
   grunt.loadNpmTasks("grunt-contrib-htmlmin");
-
+ 
   // Default task.
   grunt.registerTask("default", [
-    "myth",
+    "sass",
     "cssmin:concat",
     "cssmin:minify",
     "cssmin:release",
