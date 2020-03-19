@@ -25,8 +25,8 @@ module.exports = function(grunt) {
       },
       release: {
         files: {
-          "flexboxgrid2.css": "src/flexboxgrid2.css",
-          "dist/flexboxgrid2.css": "src/flexboxgrid2.css"
+          "flexboxgrid2.css": "flexboxgrid2.css",
+          "dist/flexboxgrid2.css": "dist/flexboxgrid2.css"
         }
       }
     },
@@ -87,18 +87,11 @@ module.exports = function(grunt) {
       }
     }
   });
-
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks("grunt-sass");
-  grunt.loadNpmTasks("grunt-myth");
-  grunt.loadNpmTasks("grunt-contrib-cssmin");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-processhtml");
-  grunt.loadNpmTasks("grunt-contrib-htmlmin");
- 
+  require('load-grunt-tasks')(grunt);
   // Default task.
   grunt.registerTask("default", [
     "sass",
+    "myth",
     "cssmin:concat",
     "cssmin:minify",
     "cssmin:release",
